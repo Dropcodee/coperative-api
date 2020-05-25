@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ValidateRegisterInputRequest;
 use App\Repository\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,13 @@ class AuthController extends Controller
         return response()->json(['message' => 'Logged you in now' ]);
     }
 
-     public function register(Request $request) {
+     public function register(ValidateRegisterInputRequest $request) {
+        # validate request using validateregisterinputrequest.php
+         # grap inputs after validation
+         $credentials = $request->post();
+         # create new user
+         $user = $this->userRepository->createUser($credentials);
+         #mail user verification token
         return response()->json(['message' => 'Logged you out now' ]);
     }
 

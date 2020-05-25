@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone_number')->unique();
             $table->boolean('approved')->default(0);
-            $table->date('birth_date');
+            $table->date('birth_date')->nullable();
             $table->string('verification_token');
             $table->string('guarantor_mail');
             $table->boolean('guarantor_approved')->default(0);
