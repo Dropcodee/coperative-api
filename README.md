@@ -1,6 +1,6 @@
 # APPLICATION SETUP
  **Clone Repository**
- 1. `git clone`
+ 1. `git clone git@github.com:Joshua-owolabi/coperative-api.git`
  
 **Install Dependencies & Basic Setup**
 1. `composer install`
