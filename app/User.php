@@ -18,7 +18,8 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'phone_number',
+        'email', 'password','guarantor_mail', 'verification_token'
     ];
 
     /**
@@ -52,16 +53,21 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    public function  apiformat() {
-        return [
-            'userId' => $this->id,
-            'userEmail' => $this->email,
-        ];
-    }
+
      public function  format() {
         return [
-            'userId' => $this->id,
-            'userEmail' => $this->email,
+            'userid' => $this->id,
+            'firstname' => $this->first_name,
+            'lastname' => $this->last_name,
+            'email' => $this->email,
+            'avatar' => $this->avatar,
+            'phone' => $this->phone_number,
+            'approved' => $this->approved,
+            'dob' => $this->birth_date,
+            'guarantorApproved' => $this->guarantor_approved,
+            'employment' => $this->employment(),
+            'bank' => $this->bank(),
+            'guarantor' => $this->guarantor()
         ];
     }
 
