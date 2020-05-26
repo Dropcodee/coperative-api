@@ -15,9 +15,11 @@
         <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/plugins/font-awesome/css/all.min.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/plugins/waves/waves.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/plugins/nvd3/nv.d3.min.css') }}" rel="stylesheet">
         <!-- Theme Styles -->
         <link href="{{ asset('assets/css/alpha.min.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/dev.css') }}" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -25,14 +27,19 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body class="login-page sign-in">
+    <body>
         <div class="loader">
             <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
         <div class="alpha-app">
-            @yield('content')
+            @include('menus.header')
+            @include('menus.search')
+            @include('menus.sidebar')
+            <div class="page-content">
+                @yield('content')
+            </div>
         </div>
     </div>
     <!-- Javascripts -->
@@ -42,5 +49,15 @@
     <script src="{{asset('assets/plugins/waves/waves.min.js')}}"></script>
     <script src="{{asset('assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
     <script src="{{asset('assets/js/alpha.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/d3/d3.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/nvd3/nv.d3.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/apexcharts/dist/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot/jquery.flot.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot/jquery.flot.time.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot/jquery.flot.symbol.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot/jquery.flot.resize.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
 </body>
 </html>

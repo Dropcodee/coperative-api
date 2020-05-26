@@ -7,38 +7,36 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-
 class UserRepository implements UserRepositoryInterface {
 	public function authenticateUser($credentials) {
 
-        # authenticate user credentials with our db data
-        if (! $token = auth()->attempt($credentials)) {
-            return [
-                'status' => 'error',
-                'message' => 'invalid credentials'
-            ];
-        }
-        # after authentication is done fetch user
-        $user = User::where('email', $credentials['email'])->first();
-        # format data to be sent to frontend remove password & some fragile data.
-        $user = $user->format();
-        # add user token to user data
-        $token = $this->respondWithToken($token);
-        return array(
-            'status' => 'success',
-            'message' => 'successfully logged in',
-            'user' => $user,
-            'token' => $token
-        );
+		# authenticate user credentials with our db data
+		if (!$token = auth()->guard('api')->attempt($credentials)) {
+			return [
+				'status' => 'error',
+				'message' => 'invalid credentials',
+			];
+		}
+		# after authentication is done fetch user
+		$user = User::where('email', $credentials['email'])->first();
+		# format data to be sent to frontend remove password & some fragile data.
+		$user = $user->format();
+		# add user token to user data
+		$token = $this->respondWithToken($token);
+		return array(
+			'status' => 'success',
+			'message' => 'successfully logged in',
+			'user' => $user,
+			'token' => $token,
+		);
 	}
-     protected function respondWithToken($token)
-        {
-            return response()->json(array(
-            'api_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-            ));
-        }
+	protected function respondWithToken($token) {
+		return response()->json(array(
+			'api_token' => $token,
+			'token_type' => 'bearer',
+			// 'expires_in' => auth()->factory()->getTTL() * 60,
+		));
+	}
 	public function createUser($credentials) {
 		# generate verification token
 		$credentials['verification_token'] = Str::random(60);
@@ -67,7 +65,7 @@ class UserRepository implements UserRepositoryInterface {
 			'phone_number.unique' => 'this phone number is already taken',
 			'guarantor_mail.required' => 'please you need a guarantor',
 		);
-        return Validator::make($credentials, $rules, $messages);
+		return Validator::make($credentials, $rules, $messages);
 	}
 	public function mailUser($userdetails) {
 		return $userdetails;
