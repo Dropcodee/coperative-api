@@ -43,7 +43,7 @@
                             <i class="material-icons">people</i>Users<i class="material-icons sub-arrow">keyboard_arrow_right</i>
                         </a>
                         <ul class="accordion-submenu list-unstyled">
-                            <li><a href="{{ route('home') }}">Members</a></li>
+                            <li><a href="{{ route('members') }}">Members</a></li>
                             <li><a href="{{ route('home') }}">Employee & Payroll</a></li>
                             <li><a href="{{ route('home') }}">Add Employees</a></li>
                         </ul>

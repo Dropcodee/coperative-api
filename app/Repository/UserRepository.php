@@ -73,4 +73,23 @@ class UserRepository implements UserRepositoryInterface {
 	public function mailGuarantor($userdetails) {
 		return $userdetails;
 	}
+	public function fetchMembersOnly() {
+		# first filter users & get members only
+        return User::orderBy('first_name')
+            ->with('roles')
+            ->get()
+            ->map( function ($member) {
+                return [
+					'member_id' => $member->id,
+                    'first_name' => $member->first_name,
+                    'last_name' => $member->last_name,
+					'email' => $member->email,
+					'phone' => $member->phone_number,
+					'admin_approved' => $member->approved,
+					'guarantor_approved' => $member->guarantor_approved,
+					'mail_verified' => $member->email_verified_at,
+                    'role' => $member->getRoleNames()
+				];
+            });
+	}
 }

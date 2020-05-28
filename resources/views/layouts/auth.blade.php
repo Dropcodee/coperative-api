@@ -8,7 +8,7 @@
         <meta name="author" content="FSTACKDEV">
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title> LMU-COPERATIVE | @yield('title') </title>
+        <title> LMU-COOPERATIVE | @yield('title') </title>
         <!-- Styles -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">

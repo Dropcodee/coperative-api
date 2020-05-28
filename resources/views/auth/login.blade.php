@@ -7,9 +7,16 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="card login-box">
                         <div class="card-body">
-                            <h5 class="card-title">Sign In</h5>
-                            <form method="POST" action="{{ route('login') }}">
+                            <h2 class="card-title text-center">Welcome</h5>
+                            <form method="POST" action="{{ route('loginRequest') }}">
                                 @csrf
+                                @if ($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        <div class="alert alert-danger" role="alert">
+                                            {{$error}}
+                                        </div>
+                                    @endforeach
+                                @endif
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" required autocomplete="email" autofocus>

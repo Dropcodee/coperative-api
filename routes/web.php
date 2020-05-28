@@ -15,7 +15,19 @@ use Illuminate\Support\Facades\Route;
 
 Auth::Routes();
 Route::get('/', function () {
-	return view('auth.login');
+    return view('auth.login');
 });
+# admin login page logic
+Route::post('loginRequest', 'Admin\AdminAuthController@login')->name('loginRequest');
 
-Route::get('/home', 'HomeController@index')->name('home');
+# admin page dashboard
+Route::get('/home', 'HomeController@index')
+    ->name('home')
+    ->middleware('role:admin|super-admin|developer');
+Route::namespace('Admin')->prefix('admin')->group(function() {
+# view all members
+Route::get('members', 'UserController@members')
+    ->name('members')
+    ->middleware('permission:view all users');
+
+});
